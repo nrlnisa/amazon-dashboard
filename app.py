@@ -41,11 +41,9 @@ df["actual_price"] = (
 # Sample data for performance
 df = df.sample(500)
 
-# Initialize Dash app
-if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 10000))  # Render dynamically assigns a port
-    app.run(host="0.0.0.0", port=port, debug=True)
-
+# ✅ Initialize Dash app
+app = dash.Dash(__name__)
+server = app.server  # required for Render
 
 categories = df['category'].unique()
 
@@ -190,5 +188,7 @@ def update_charts(selected_category):
     return fig1, fig2
 
 
+# ✅ Correct run block for Render
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port, debug=True)
