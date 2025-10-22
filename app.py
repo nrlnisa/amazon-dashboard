@@ -2,6 +2,7 @@ import pandas as pd
 import dash
 from dash import html, dcc, Input, Output
 import plotly.express as px
+import os
 
 # Load CSV
 df = pd.read_csv("amazon.csv")
@@ -41,8 +42,10 @@ df["actual_price"] = (
 df = df.sample(500)
 
 # Initialize Dash app
-app = dash.Dash(__name__)
-app.title = "Amazon Products Dashboard"
+if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 10000))  # Render dynamically assigns a port
+    app.run(host="0.0.0.0", port=port, debug=True)
+
 
 categories = df['category'].unique()
 
