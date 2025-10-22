@@ -4,7 +4,7 @@ from dash import html, dcc, Input, Output
 import plotly.express as px
 
 # Load CSV
-df = pd.read_csv(r"C:\Users\user\Downloads\amazon.csv")
+df = pd.read_csv("amazon.csv")
 
 # Clean and convert numeric columns
 df["discount_percentage"] = (
